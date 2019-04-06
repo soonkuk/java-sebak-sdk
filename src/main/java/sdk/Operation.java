@@ -1,33 +1,58 @@
 package sdk;
 
 public class Operation {
-	OperationHeader H;
-	OperationBody B;
+	public OperationHeader H;
+	public OperationBody B;
+
+	public Operation() {}
 
 	public Operation(String type, String amount, String target, String linked) {
 		this.H = new OperationHeader(type);
-		if (type == "create-account") {
+		if (type.equals("create-account")) {
 			this.B = new CreateAccount(amount, target, linked);
 		}
-		if (type == "payment") {
+		if (type.equals("payment")) {
 			this.B = new Payment(amount, target);
 		}
 	}
-	Object[] toArray(){
+	public Object[] toArray(){
 		Object[] array = {this.H.toArray(), this.B.toArray()};
 		return array;
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Operation)){
+			return false;
+		}
+		Operation op = (Operation)obj;
+		if ((H.equals(op.H)) && (B.equals(op.B))){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
 
 class OperationHeader {
-	String type;
+	public String type;
 	
-	OperationHeader(String type) {
+	public OperationHeader(String type) {
 		this.type = type;
 	}
-	String[] toArray() {
+	public String[] toArray() {
 		String[] array = {this.type};
 		return array;
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof OperationHeader))
+			return false;
+		OperationHeader opHeader = (OperationHeader)obj;
+		if (type.equals(opHeader.type))
+			return true;
+		else
+			return false; 
 	}
 }
 
@@ -36,11 +61,11 @@ interface OperationBody {
 }
 
 class CreateAccount implements OperationBody {
-	private String target;
-	private String amount;
-	private String linked;
+	public String target = "";
+	public String amount = "";
+	public String linked = "";
 
-	CreateAccount(String amount, String target, String linked) {
+	public CreateAccount(String amount, String target, String linked) {
 		this.target = target;
 		this.amount = amount;
 		this.linked = linked;
@@ -49,18 +74,38 @@ class CreateAccount implements OperationBody {
 		String[] array = {this.target, this.amount, this.linked};
 		return array;
 	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof CreateAccount))
+			return false;
+		CreateAccount opCreateAccount = (CreateAccount)obj;
+		if ((target.equals(opCreateAccount.target)) && (amount.equals(opCreateAccount.amount)) && (linked.equals(opCreateAccount.linked)))
+			return true;
+		else
+			return false; 
+	}
 }
 
 class Payment implements OperationBody {
-	private String amount;
-	private String target;
+	public String amount = "";
+	public String target = "";
 
-	Payment(String amount, String target) {
+	public Payment(String amount, String target) {
 		this.amount = amount;
 		this.target = target;
 	}
 	public String[] toArray(){
 		String[] array = {this.target, this.amount};
 		return array;
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Payment))
+			return false;
+		Payment opPayment = (Payment)obj;
+		if ((target.equals(opPayment.target)) && (amount.equals(opPayment.amount)))
+			return true;
+		else
+			return false; 
 	}
 }
