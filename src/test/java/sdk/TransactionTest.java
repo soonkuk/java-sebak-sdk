@@ -44,8 +44,8 @@ public class TransactionTest {
 	public void testSenderCheck() {}
 
 	public Transaction makeTestTx() {
-		Operation op1 = new Operation("payment", "100", "GB3AOQD2M5AKMNWUP2HFCVQYFQNGTAFTJ24BHZ56ONSGGOXMG3EBO6OE", "");
-		Operation op2 = new Operation("create-account", "1000000", "GD54SAKFHJ2QSBLEHZIQV3UWQ42OD6VQ6HKF6TN6F72US3AUQNDSONEV", "");
+		Operation op1 = new Operation("payment", "100", "GB3AOQD2M5AKMNWUP2HFCVQYFQNGTAFTJ24BHZ56ONSGGOXMG3EBO6OE");
+		Operation op2 = new Operation("create-account", "1000000", "GD54SAKFHJ2QSBLEHZIQV3UWQ42OD6VQ6HKF6TN6F72US3AUQNDSONEV");
 		Transaction tx = new Transaction();
 		tx.AddOperation(op1);
 		tx.AddOperation(op2);

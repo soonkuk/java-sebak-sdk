@@ -108,14 +108,7 @@ public class Transaction {
 			HashMap<String, Object> c = (HashMap<String, Object>)op;
 			HashMap<String, String> opHeader = (HashMap<String, String>)(c.get("H"));
 			HashMap<String, String> opBody = (HashMap<String, String>)(c.get("B"));
-			Operation temp = new Operation();
-			String opType = ((String)(opHeader.get("type")));
-
-			if (opType.equals("payment")) {
-				temp = new Operation((String)(opHeader.get("type")), (String)(opBody.get("amount")), (String)(opBody.get("target")), "");
-			} else if (opType.equals("create-account")) { 
-				temp = new Operation((String)(opHeader.get("type")), (String)(opBody.get("amount")), (String)(opBody.get("target")), (String)(opBody.get("linked")));
-			}
+			Operation temp = new Operation((String)(opHeader.get("type")), (String)(opBody.get("amount")), (String)(opBody.get("target")));
 			ops.add(temp);
 		}
 		byte[] seq = ByteBuffer.allocate(4).putInt((int)txBody.get("sequence_id")).array();

@@ -6,10 +6,10 @@ public class Operation {
 
 	public Operation() {}
 
-	public Operation(String type, String amount, String target, String linked) {
+	public Operation(String type, String amount, String target) {
 		this.H = new OperationHeader(type);
 		if (type.equals("create-account")) {
-			this.B = new CreateAccount(amount, target, linked);
+			this.B = new CreateAccount(amount, target, "");
 		}
 		if (type.equals("payment")) {
 			this.B = new Payment(amount, target);
